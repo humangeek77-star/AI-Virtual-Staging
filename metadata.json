@@ -1,0 +1,7 @@
+{
+  "name": "AI Virtual Staging",
+  "description": "A high-end virtual staging platform for real estate listings. Upload room photos, choose from diverse interior design styles, and use AI to refine or add furniture to your properties.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
