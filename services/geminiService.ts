@@ -1,12 +1,12 @@
 
-import { GoogleGenAI, Type } from "@google/genai";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 import { DesignStyle } from "../types";
 
 export class GeminiService {
-  private static ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
+  private static ai = new GoogleGenerativeAI({ apiKey: process.env.API_KEY || '' });
 
   static async suggestDesignStyle(base64Image: string): Promise<DesignStyle> {
-    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
+    const ai = new GoogleGenerativeAI({ apiKey: process.env.API_KEY || '' });
     const availableStyles = Object.values(DesignStyle).join(', ');
 
     const prompt = `Analyze this real estate room image and suggest the single most suitable interior design style from the following options: ${availableStyles}. 
