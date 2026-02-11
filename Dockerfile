@@ -1,21 +1,17 @@
-FROM node:20-alpine
+FROM node:18-alpine
 
 WORKDIR /app
 
-# Copy and install
 COPY package*.json ./
-RUN npm install
+RUN npm ci
 
-# Copy everything
 COPY . .
 
-# Set environment variables for the backend
+# Cloud Run requires the app to listen on PORT
+ENV PORT=8080
 ENV API_BACKEND_PORT=8080
 ENV API_BACKEND_HOST=0.0.0.0
-ENV PORT=8080
 
-# Expose port
 EXPOSE 8080
 
-# Run the backend server directly
-CMD ["node", "backend/server.js"]
+CMD ["node", "server.js"]
