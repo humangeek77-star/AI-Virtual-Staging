@@ -22,7 +22,7 @@ app.get("/", (req, res) => {
 app.post("/api/stage", async (req, res) => {
   try {
     const { image, roomType } = req.body;
-
+    
     if (!image) {
       return res.status(400).json({ error: "Image is required" });
     }
@@ -36,7 +36,6 @@ app.post("/api/stage", async (req, res) => {
 
     const result = await response.json();
     res.json(result);
-
   } catch (err) {
     console.error("Error in /api/stage:", err);
     res.status(500).json({ error: "Internal server error" });
