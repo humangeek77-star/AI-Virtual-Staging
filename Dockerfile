@@ -1,16 +1,18 @@
 FROM node:18-alpine
 
-# Set working directory to backend folder
-WORKDIR /app/backend
+WORKDIR /app
 
-# Copy package files from backend
-COPY backend/package*.json ./
+# Copy root package files
+COPY package*.json ./
 
-# Install dependencies
-RUN npm ci
+# Copy workspace package files
+COPY backend/package*.json ./backend/
 
-# Copy the rest of backend code
-COPY backend/ ./
+# Install all dependencies (root + workspaces)
+RUN npm install
+
+# Copy all source code
+COPY . .
 
 # Environment variables
 ENV PORT=8080
@@ -19,5 +21,5 @@ ENV API_BACKEND_HOST=0.0.0.0
 
 EXPOSE 8080
 
-# Start the server
-CMD ["node", "server.js"]
+# Start the backend server
+CMD ["node", "backend/server.js"]
