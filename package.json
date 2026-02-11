@@ -1,13 +1,10 @@
-{
-  "name": "virtualstager-ai-pro",
-  "workspaces": ["frontend", "backend"],
-  "scripts": {
-    "dev-frontend": "npm run dev --prefix frontend",
-    "dev-backend": "npm run dev --prefix backend",
-    "dev": "concurrently \"npm run dev-frontend\" \"npm run dev-backend\"",
-    "build": "echo 'No build step needed'"
-  },
-  "devDependencies": {
-    "concurrently": "latest"
-  }
-}
+FROM node:18-alpine
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+COPY . .
+ENV PORT=8080
+ENV API_BACKEND_PORT=8080
+ENV API_BACKEND_HOST=0.0.0.0
+EXPOSE 8080
+CMD ["node", "backend/server.js"]
