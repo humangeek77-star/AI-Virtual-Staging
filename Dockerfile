@@ -9,9 +9,13 @@ RUN npm install
 # Copy everything
 COPY . .
 
-# Expose port
+# Set environment variables for the backend
+ENV API_BACKEND_PORT=8080
+ENV API_BACKEND_HOST=0.0.0.0
 ENV PORT=8080
+
+# Expose port
 EXPOSE 8080
 
-# Run the dev command (frontend + backend)
-CMD ["npm", "run", "dev"]
+# Run the backend server directly
+CMD ["node", "backend/server.js"]
