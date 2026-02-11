@@ -5,7 +5,7 @@
     "dev-frontend": "npm run dev --prefix frontend",
     "dev-backend": "npm run dev --prefix backend",
     "dev": "concurrently \"npm run dev-frontend\" \"npm run dev-backend\"",
-    "build": "cd frontend && npm install && npm run build"
+    "build": "echo 'No build step needed'"
   },
   "devDependencies": {
     "concurrently": "latest"
