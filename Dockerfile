@@ -3,9 +3,8 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci
 COPY . .
-# Cloud Run requires the app to listen on PORT
 ENV PORT=8080
 ENV API_BACKEND_PORT=8080
 ENV API_BACKEND_HOST=0.0.0.0
 EXPOSE 8080
-CMD ["node", "server.js"]
+CMD ["node", "./server.js"]
