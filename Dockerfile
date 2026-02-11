@@ -1,24 +1,27 @@
-# Use Node.js 20 (since your package.json requires it)
 FROM node:20-alpine
 
-# Set working directory
 WORKDIR /app
 
-# Copy package files
+# Copy root package files
 COPY package*.json ./
 
-# Install dependencies
+# Install root dependencies
 RUN npm install
 
-# Copy all source files
+# Copy everything
 COPY . .
 
-# Build the frontend
+# Install frontend dependencies and build
+WORKDIR /app/frontend
+RUN npm install
 RUN npm run build
 
-# Expose port 8080 (Cloud Run default)
+# Go back to root
+WORKDIR /app
+
+# Expose port
 ENV PORT=8080
 EXPOSE 8080
 
-# Start the Node.js server
-CMD ["node", "server.js"]
+# Start the backend server
+CMD ["node", "backend/server.js"]
