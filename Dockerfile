@@ -1,25 +1,24 @@
 FROM node:18-alpine
 
+# Create app directory
 WORKDIR /app
 
-# Copy root package files
+# Copy package files
 COPY package*.json ./
 
-# Copy workspace package files
-COPY backend/package*.json ./backend/
-
-# Install all dependencies (root + workspaces)
-RUN npm install
+# Install dependencies
+RUN npm ci
 
 # Copy all source code
 COPY . .
 
-# Environment variables
+# Cloud Run environment
 ENV PORT=8080
 ENV API_BACKEND_PORT=8080
 ENV API_BACKEND_HOST=0.0.0.0
 
+# Expose Cloud Run port
 EXPOSE 8080
 
-# Start the backend server
-CMD ["node", "backend/server.js"]
+# Start backend server
+CMD ["node", "server.js"]
